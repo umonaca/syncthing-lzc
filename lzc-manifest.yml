@@ -1,0 +1,40 @@
+lzc-sdk-version: 0.1
+name: Syncthing
+package: cloud.lazycat.app.syncthing
+version: 0.0.1
+description:
+license: https://choosealicense.com/licenses/mit/
+homepage:
+author:
+application:
+  multi_instance: true
+  subdomain: syncthing
+  public_path:
+    - /
+  routes:
+    - /__not_use=exec://80,/lzcapp/pkg/content/init.sh
+    - /=http://$uid.syncthing.cloud.lazycat.app.syncthing.lzcapp:8384
+  ingress:
+    - protocol: tcp
+      port: 8384
+      service: syncthing
+    - protocol: tcp
+      port: 22000
+      service: syncthing
+    - protocol: udp
+      port: 22000
+      service: syncthing
+    - protocol: udp
+      port: 21027
+      service: syncthing
+  background_task: true
+services:
+  syncthing:
+    image: dev.myoland.heiyu.space/lzc/cgutman/syncthing/syncthing:latest
+    binds:
+      - /lzcapp/run/mnt/home/Syncthing:/var/syncthing
+      - /lzcapp/var/syncthing/config:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - STHOMEDIR=/config
