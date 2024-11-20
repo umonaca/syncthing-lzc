@@ -16,9 +16,6 @@ application:
     - /=http://$uid.syncthing.cloud.lazycat.app.syncthing.lzcapp:8384
   ingress:
     - protocol: tcp
-      port: 8384
-      service: syncthing
-    - protocol: tcp
       port: 22000
       service: syncthing
     - protocol: udp
