@@ -27,7 +27,7 @@ application:
   background_task: true
 services:
   syncthing:
-    image: registry.lazycat.cloud/syncthing/syncthing:1.28
+    image: registry.lazycat.cloud/syncthing/syncthing:1.29.6
     binds:
       - /lzcapp/run/mnt/home/Syncthing:/var/syncthing
       - /lzcapp/var/syncthing/config:/config
